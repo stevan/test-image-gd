@@ -7,7 +7,7 @@ use Test::Builder::Tester tests => 2;
 use Test::More;
 
 BEGIN { 
-    use_ok('Test::GD');
+    use_ok('Test::Image::GD');
 }
 
 test_out("ok 1 - ... these are the same images");
