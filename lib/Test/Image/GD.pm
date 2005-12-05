@@ -10,11 +10,10 @@ use Test::Builder ();
 use Scalar::Util 'blessed';
 use GD qw(:cmp);
 
-sub import { 
-    my $pkg = caller;
-    no strict 'refs';
-    *{"${pkg}::cmp_image"} = \&cmp_image;
-}
+require Exporter;
+
+our @ISA    = qw(Exporter);
+our @EXPORT = qw(cmp_image);
 
 my $Test = Test::Builder->new;
 
@@ -60,9 +59,9 @@ Test::Image::GD - A module for testing images using GD
 
 =head1 DESCRIPTION
 
-This module is meant to be used when developing custom graphics, it provides only one function
+This module is meant to be used for testing custom graphics, it provides only one function
 at the moment, which is C<cmp_image>, and can be used to compare two images to see if they are
-visually similar.
+visually similar. Future versions may include other testing functions.
 
 =head1 FUNCTIONS
 
@@ -80,6 +79,16 @@ or a file path (both are valid parameters to the C<GD::Image> constructor).
 
 =head1 TO DO
 
+=over 4
+
+=item Add more functions
+
+This module currently serves a very basic need of mine, however, I am sure as I start writing 
+more tests against images I will find a need for other testing functions. Any suggestions are 
+welcome.
+
+=back
+
 =head1 BUGS
 
 None that I am aware of. Of course, if you find a bug, let me know, and I will be sure to fix it. 
@@ -88,13 +97,21 @@ None that I am aware of. Of course, if you find a bug, let me know, and I will b
 
 I use B<Devel::Cover> to test the code coverage of my tests, below is the B<Devel::Cover> report on this module test suite.
 
+ ---------------------------- ------ ------ ------ ------ ------ ------ ------
+ File                           stmt   bran   cond    sub    pod   time  total
+ ---------------------------- ------ ------ ------ ------ ------ ------ ------
+ Test/Image/GD.pm              100.0  100.0   60.0  100.0  100.0  100.0   91.3
+ ---------------------------- ------ ------ ------ ------ ------ ------ ------ 
+ Total                         100.0  100.0   60.0  100.0  100.0  100.0   91.3
+ ---------------------------- ------ ------ ------ ------ ------ ------ ------
+
 =head1 SEE ALSO
 
 The C<compare> function of C<GD::Image> class, that is how this module is implemented.
 
 =head1 AUTHOR
 
-stevan little, E<lt>stevan@iinteractive.comE<gt>
+Stevan Little, E<lt>stevan@iinteractive.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
