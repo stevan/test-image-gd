@@ -5,7 +5,5 @@ README
 lib/Test/Image/GD.pm
 t/10_Test_Image_GD_test.t
 t/20_cmp_image.t
-t/cpan.gif
-t/download_perl.gif
 t/pod.t
 t/pod_coverage.t
