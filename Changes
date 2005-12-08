@@ -1,5 +1,13 @@
 Revision history for Perl extension Test-Image-GD.
 
+0.03 
+    - added size_ok() function 
+        - added tests for this
+    - added height_ok() function 
+        - added tests for this
+    - added width_ok() function 
+        - added tests for this                    
+
 0.02 Wed, Dec 7, 2005
     - removed GIF files from distro and now the test
       file itself generates them, this is (IMO) a more
