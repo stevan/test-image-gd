@@ -4,21 +4,20 @@ package Test::Image::GD;
 use strict;
 use warnings;
 
-our $VERSION = '0.03';
-
 use Test::Builder ();
-use Scalar::Util 'blessed';
-use GD qw(:cmp);
+use Scalar::Util  'blessed';
+use GD            ':cmp';
 
 require Exporter;
 
-our @ISA    = qw(Exporter);
-our @EXPORT = qw(
-                cmp_image 
-                size_ok 
-                height_ok 
-                width_ok
-              );
+our $VERSION = '0.03';
+our @ISA     = ('Exporter');
+our @EXPORT  = qw(
+                 cmp_image 
+                 size_ok 
+                 height_ok 
+                 width_ok
+                 );
 
 my $Test = Test::Builder->new;
 
@@ -111,13 +110,19 @@ Test::Image::GD - A module for testing images using GD
   my $control = GD::Image->new('control.gif');
   cmp_image($test, $control, '... these images should match');
   
+  # some other test functions ...
+  
   size_ok('camel.gif', [ 100, 350 ], '... the image is 100 x 350");
+  
+  height_ok('test.gif', 200, '... the image has a height of 200');
+  width_ok('test.gif', 200, '... the image has a width of 200');  
 
 =head1 DESCRIPTION
 
-This module is meant to be used for testing custom graphics, it provides only one function
-at the moment, which is C<cmp_image>, and can be used to compare two images to see if they are
-visually similar. Future versions may include other testing functions.
+This module is meant to be used for testing custom graphics, it attempts 
+to "visually" compare the images, this means it ignores invisible differences 
+like color palettes and metadata. It also provides some extra functions to 
+check the size of the image.
 
 =head1 FUNCTIONS
 
@@ -125,23 +130,37 @@ visually similar. Future versions may include other testing functions.
 
 =item B<cmp_image ($got, $expected, $message)>
 
-This function will tell you whether the two images will look different, ignoring differences 
-in the order of colors in the color palette and other invisible changes. 
+This function will tell you whether the two images will look different, 
+ignoring differences in the order of colors in the color palette and 
+other invisible changes. 
 
-Both C<$got> and C<$expected> can be either instances of C<GD::Image> or either a file handle 
-or a file path (both are valid parameters to the C<GD::Image> constructor).
+Both C<$got> and C<$expected> can be either instances of C<GD::Image> or 
+either a file handle or a file path (both are valid parameters to the 
+C<GD::Image> constructor).
 
 =item B<size_ok ($got, [ $width, $height ], ?$message)>
 
-... 
+This function will check if an image is a certain size. 
+
+As with the C<cmp_image> function, the C<$got> parameter can be either an 
+instance of C<GD::Image> or a file handle or a file path (all are valid 
+parameters to the C<GD::Image> constructor).
 
 =item B<height_ok ($got, $height, ?$message)>
 
-... 
+This function will check if an image is a certain height. 
+
+As with the C<cmp_image> function, the C<$got> parameter can be either an 
+instance of C<GD::Image> or a file handle or a file path (all are valid 
+parameters to the C<GD::Image> constructor).
 
 =item B<width_ok ($got, $width, ?$message)>
 
-... 
+This function will check if an image is a certain width. 
+
+As with the C<cmp_image> function, the C<$got> parameter can be either an 
+instance of C<GD::Image> or a file handle or a file path (all are valid 
+parameters to the C<GD::Image> constructor).
 
 =back
 
@@ -151,19 +170,21 @@ or a file path (both are valid parameters to the C<GD::Image> constructor).
 
 =item Add more functions
 
-This module currently serves a very basic need of mine, however, I am sure as I start writing 
-more tests against images I will find a need for other testing functions. Any suggestions are 
-welcome.
+This module currently serves a very basic need of mine, however, I am sure as 
+I start writing more tests against images I will find a need for other testing 
+functions. Any suggestions are welcome.
 
 =back
 
 =head1 BUGS
 
-None that I am aware of. Of course, if you find a bug, let me know, and I will be sure to fix it. 
+None that I am aware of. Of course, if you find a bug, let me know, and I 
+will be sure to fix it. 
 
 =head1 CODE COVERAGE
 
-I use B<Devel::Cover> to test the code coverage of my tests, below is the B<Devel::Cover> report on this module test suite.
+I use B<Devel::Cover> to test the code coverage of my tests, below is the 
+B<Devel::Cover> report on this module test suite.
 
  ---------------------------- ------ ------ ------ ------ ------ ------ ------
  File                           stmt   bran   cond    sub    pod   time  total
@@ -175,7 +196,8 @@ I use B<Devel::Cover> to test the code coverage of my tests, below is the B<Deve
 
 =head1 SEE ALSO
 
-The C<compare> function of C<GD::Image> class, that is how this module is implemented.
+The C<compare> function of C<GD::Image> class, that is how this C<cmp_image> is 
+implemented.
 
 =head1 AUTHOR
 

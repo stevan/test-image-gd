@@ -1,6 +1,6 @@
 Revision history for Perl extension Test-Image-GD.
 
-0.03 
+0.03 Fri, Dec 9, 2005
     - added size_ok() function 
         - added tests for this
     - added height_ok() function 
